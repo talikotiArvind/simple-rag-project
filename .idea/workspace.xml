@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="74aec09b-d3a4-4bf7-8569-58fa73ce7424" name="Changes" comment="commit to fix/pipeline-review-followups">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotChats">
+    <option name="panelChat">
+      <chat>
+        <option name="activeSessionId" value="7352b43b-8ade-43fd-b988-5d59fcfcd970" />
+        <option name="sessions">
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="7352b43b-8ade-43fd-b988-5d59fcfcd970" />
+            <option name="modeId" value="Ask" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+        </option>
+        <option name="type" value="PANEL" />
+      </chat>
+    </option>
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_C:/02_MyFIles/claude-visualizer" value="3C9vAI8zAvxzgMgJA3a73M7nYEW" />
+      <entry key="_C:/02_MyFIles/my-claude-code-projects" value="3CTaskirtuDffGhts0IQC0jF1Pa" />
+      <entry key="_C:/02_MyFIles/projects/my-claude-code-projects" value="3CsrtCQcinsvNiSZ3ddKprBXX4P" />
+    </persistenceIdMap>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="3857" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="fix/pipeline-review-followups" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;aj4peakzi&quot;
+  }
+}</component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="claude/futuristic-portfolio-shvhf0" />
+                    <option name="lastUsedInstant" value="1783364744" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1782500227" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="feat/full-docs" />
+                    <option name="lastUsedInstant" value="1782499551" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="google-rag-pipeline-implementation" />
+                    <option name="lastUsedInstant" value="1781110941" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="fix/claude-hook-bugs-and-cleanup" />
+                    <option name="lastUsedInstant" value="1777925216" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/talikotiArvind/claude-code-projects.git&quot;,
+    &quot;accountId&quot;: &quot;10fa99ca-d438-4346-896c-39135f65b756&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.2198326202124041" />
+      <entry key="MS500" value="3.118137219545743" />
+      <entry key="S2" value="7.0679270654492" />
+      <entry key="S5" value="10.482666072170641" />
+      <entry key="S10" value="13.026938642619058" />
+      <entry key="S30" value="16.68999126043542" />
+      <entry key="S60" value="18.531257365502828" />
+      <entry key="M2" value="20.880532031117514" />
+      <entry key="M5" value="26.673575983894338" />
+      <entry key="M10" value="31.319859988773935" />
+      <entry key="M15" value="33.46129324379492" />
+      <entry key="M30" value="35.99621492710107" />
+      <entry key="H1" value="37.434252873756954" />
+      <entry key="H2" value="38.20045540397325" />
+      <entry key="H4" value="38.59596808208866" />
+      <entry key="D1" value="38.932061770853444" />
+      <entry key="W1" value="38.990279750235814" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="2.5298500758904527E-41" />
+      <entry key="MS500" value="7.623938424418186E-9" />
+      <entry key="S2" value="0.011622596016522008" />
+      <entry key="S5" value="0.24203068795472468" />
+      <entry key="S10" value="0.689048807289965" />
+      <entry key="S30" value="1.3990060365572161" />
+      <entry key="S60" value="1.6722665490083126" />
+      <entry key="M2" value="1.8286808305341624" />
+      <entry key="M5" value="1.9295942692041994" />
+      <entry key="M10" value="1.9644763487007146" />
+      <entry key="M15" value="1.976245692302631" />
+      <entry key="M30" value="1.988086761313347" />
+      <entry key="H1" value="1.9940343315715832" />
+      <entry key="H2" value="1.997014900020506" />
+      <entry key="H4" value="1.9985068831315813" />
+      <entry key="D1" value="1.999751068418299" />
+      <entry key="W1" value="1.999964436415919" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.1786312657704365" />
+      <entry key="MS500" value="3.0953716106331672" />
+      <entry key="S2" value="7.058596962292239" />
+      <entry key="S5" value="10.640863632344598" />
+      <entry key="S10" value="13.58738697606496" />
+      <entry key="S30" value="17.990583993478378" />
+      <entry key="S60" value="20.14218627781815" />
+      <entry key="M2" value="22.674818632565255" />
+      <entry key="M5" value="28.588302181387128" />
+      <entry key="M10" value="33.27666926892513" />
+      <entry key="M15" value="35.43236930813309" />
+      <entry key="M30" value="37.98168564763916" />
+      <entry key="H1" value="39.426970926383255" />
+      <entry key="H2" value="40.196810037709476" />
+      <entry key="H4" value="40.594144292217756" />
+      <entry key="D1" value="40.93175765141295" />
+      <entry key="W1" value="40.99023630080882" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3C9vAI8zAvxzgMgJA3a73M7nYEW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git.auto.fetch.suggestion.counter&quot;: &quot;3&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/02_MyFIles/projects/my-claude-code-projects&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\02_MyFIles\my-claude-code-projects" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="claude-visualizer" type="PythonConfigurationType" factoryName="Python">
+      <module name="claude-visualizer" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-50341a9f1f9c-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.26222.68" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="74aec09b-d3a4-4bf7-8569-58fa73ce7424" name="Changes" comment="" />
+      <created>1775810454863</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1775810454863</updated>
+      <workItem from="1775810455896" duration="2233000" />
+      <workItem from="1775821133399" duration="16000" />
+      <workItem from="1775832641962" duration="357000" />
+      <workItem from="1775847818565" duration="5759000" />
+      <workItem from="1776412215497" duration="537000" />
+      <workItem from="1776704355083" duration="2898000" />
+      <workItem from="1776759423391" duration="364000" />
+      <workItem from="1777185331593" duration="1409000" />
+    </task>
+    <task id="LOCAL-00001" summary="commit">
+      <option name="closed" value="true" />
+      <created>1775832827529</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1775832827529</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update project configuration and documentation; enhance language support">
+      <option name="closed" value="true" />
+      <created>1776366343026</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1776366343026</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add initial implementation of the stock analysis dashboard; includes data fetching, SMA calculations, and UI components">
+      <option name="closed" value="true" />
+      <created>1776366381968</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1776366381968</updated>
+    </task>
+    <task id="LOCAL-00004" summary="commit to fix/pipeline-review-followups">
+      <option name="closed" value="true" />
+      <created>1783364678480</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1783364678480</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/claude-code-usage-limit-improvision" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="commit" />
+    <MESSAGE value="Update project configuration and documentation; enhance language support" />
+    <MESSAGE value="Add initial implementation of the stock analysis dashboard; includes data fetching, SMA calculations, and UI components" />
+    <MESSAGE value="commit to fix/pipeline-review-followups" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit to fix/pipeline-review-followups" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

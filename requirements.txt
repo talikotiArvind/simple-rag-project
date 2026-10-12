@@ -1,0 +1,33 @@
+# ── Provider SDKs (src/resource/base_*.py) ────────────────────────────────
+anthropic==0.91.0
+openai-agents==0.17.7
+google-generativeai==0.8.6
+
+# ── Typed models & config ─────────────────────────────────────────────────
+pydantic==2.12.5
+python-dotenv==1.2.2
+
+# ── Testing ───────────────────────────────────────────────────────────────
+pytest==9.0.3
+pytest-cov==7.1.0
+
+# ── Linting & type checking ───────────────────────────────────────────────
+ruff==0.15.9
+mypy==1.20.0
+
+# ── Code quality metrics ──────────────────────────────────────────────────
+radon==6.0.1
+
+# ── Security scanning ─────────────────────────────────────────────────────
+bandit==1.9.4
+pip-audit==2.10.1
+
+# ── Documentation (mkdocs-agent) ──────────────────────────────────────────
+mkdocs==1.6.1
+mkdocs-material==9.7.6
+mkdocstrings==1.0.4
+mkdocstrings-python==2.0.3
+
+# ── Added per phase (see .claude/project_memory/requirements.md) ──────────
+# Phase 1: opensearch-py, fastmcp, pypdf, beautifulsoup4, boto3
+# Phase 3: okf-retrieve (prototype only — decision pending)

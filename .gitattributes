@@ -1,0 +1,13 @@
+# Normalize line endings
+* text=auto
+
+# Force LF for shell scripts (prevents CRLF failures on Linux CI)
+*.sh text eol=lf
+
+# Force LF for Python files
+*.py text eol=lf
+
+# Binary files — no line-ending conversion
+*.png binary
+*.jpg binary
+*.ico binary
