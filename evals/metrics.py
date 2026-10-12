@@ -146,7 +146,8 @@ def _type_metrics(qtype: QuestionType, scores: list[tuple[float, float]]) -> Typ
 
 
 def _by_type(scores: dict[QuestionType, list[tuple[float, float]]]) -> tuple[TypeMetrics, ...]:
-    return tuple(_type_metrics(qtype, scores[qtype]) for qtype in sorted(scores, key=lambda t: t.value))
+    ordered = sorted(scores, key=lambda t: t.value)
+    return tuple(_type_metrics(qtype, scores[qtype]) for qtype in ordered)
 
 
 def _optional_mean(values: Sequence[float]) -> float | None:
