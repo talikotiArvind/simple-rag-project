@@ -58,7 +58,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Build: `Settings` typed dataclass loaded from env (python-dotenv already pinned): index name, embedding model, top_k defaults, `log_level`; secrets held as a `SecretStr`-style wrapper whose `repr` is redacted; fail-fast `ConfigError` for missing required values only when `require_secrets=True` (Phase 0 smoke runs with `False`). `.env.example` lists names only, no values. `.gitignore` is touched by this task only.
   - Depends on: TASK-02. Worktree: `.claude/worktrees/task-04/`  Merge order: 2
   - Sub-agent: coding-agent
-- [ ] TASK-05: D-005 import-boundary checker `tools/check_imports.py` <- PARALLEL-GROUP-A
+- [x] TASK-05: D-005 import-boundary checker `tools/check_imports.py` <- PARALLEL-GROUP-A
   - Build: AST-based `ImportBoundaryChecker` (stdlib only, exit code 1 on violation, prints FILE:LINE). Rules: (1) anywhere under `rag_core/` forbid `agents`, `openai_agents`, `mcp`, `fastmcp`, `google.adk`, `src.resource` and `src/resource` equivalents, `adapters`, `mcp_server`; (2) provider SDKs (`openai`, `anthropic`, `cohere`, `voyageai`, `boto3`, `opensearchpy`, `google.generativeai`, `google.genai`) allowed ONLY in `rag_core/store/`, and must be function-level (lazy) imports there; (3) `rag_core/ingest|okf|ranking`, `retrieve.py`, `ingest_pipeline.py`, `models.py`, `interfaces.py` may import only stdlib, `rag_core.*`; flags relative-import and `importlib.import_module("...")` literal forms too. Rules in a data table at the top, so Phase 1 can extend them.
   - Depends on: TASK-01. Output: `tools/check_imports.py`
   - Worktree: `.claude/worktrees/task-05/`  Merge order: 3
@@ -125,7 +125,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-02 | done | NONE | |
 | TASK-03 | done | A | |
 | TASK-04 | done | A | |
-| TASK-05 | pending | A | |
+| TASK-05 | done | A | |
 | TASK-06 | pending | A | |
 | TASK-07 | pending | A | |
 | TASK-08 | pending | B | |
