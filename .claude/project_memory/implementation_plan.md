@@ -77,7 +77,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Build: `TenantScopedStore` wrapping a `HybridIndex`, `SourceStore`, `ConceptRepository` (Protocols only, no SDK imports). Injects `tenant_id` filter into the index query (never post-filter), rejects any caller-supplied `tenant_id` filter, takes `AuthContext` on every method, raises `AuthorizationError` on missing/empty tenant. Concept/document fetch checks node tenant.
   - Depends on: TASK-03 (and TASK-07 for rules). Worktree: `.claude/worktrees/task-08/`  Merge order: 1
   - Sub-agent: coding-agent
-- [ ] TASK-09: Metrics `evals/metrics.py` <- PARALLEL-GROUP-B
+- [x] TASK-09: Metrics `evals/metrics.py` <- PARALLEL-GROUP-B
   - Build: pure functions per the fixed definitions: `recall_at_k(ranked_doc_ids, relevant_doc_ids, k=5)` (per-question; chunks of one doc counted once, dedupe preserving rank), `mean_recall`, `reciprocal_rank`, `mrr`, `abstention_correct(results, threshold)` for unanswerable questions (scored separately, excluded from recall/MRR averages), `citation_valid(citation, ...)` stub encoding the 4 conditions with injected lookups. Breakdown by qtype.
   - Depends on: TASK-06. Output: `evals/metrics.py`. Worktree: `.claude/worktrees/task-09/`  Merge order: 2
   - Sub-agent: coding-agent
@@ -129,7 +129,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-06 | pending | A | |
 | TASK-07 | done | A | |
 | TASK-08 | done | B | feat/tenant-scoped-store |
-| TASK-09 | pending | B | |
+| TASK-09 | done | B | |
 | TASK-10 | pending | B | |
 | TASK-11 | pending | NONE | |
 | TASK-12..17 | pending | C | |
