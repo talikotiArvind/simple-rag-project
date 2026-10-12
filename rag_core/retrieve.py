@@ -1,11 +1,13 @@
 """RetrievalService: orchestrates embed -> scoped search -> fuse -> rerank via Protocols only."""
 from __future__ import annotations
 
+import logging
 import time
 import uuid
 from dataclasses import replace
 from typing import TYPE_CHECKING, Protocol
 
+from rag_core.envelope import wrap_retrieved
 from rag_core.exceptions import ValidationError
 from rag_core.models import (
     Candidate,
@@ -20,6 +22,8 @@ if TYPE_CHECKING:
     from rag_core.interfaces import Embedder, Reranker
     from rag_core.models import AuthContext, Hit, RankedLists, SearchRequest
     from rag_core.store.scoped_store import TenantScopedStore
+
+_LOG = logging.getLogger("rag_core.retrieve")
 
 
 class Fuser(Protocol):
@@ -88,11 +92,35 @@ class RetrievalService:
         timings.rerank_ms = _elapsed_ms(start)
 
         results = sort_results(self._to_result(c) for c in ranked)[: request.top_k]
-        return SearchResponse(
+        response = SearchResponse(
             results=results,
             request_id=uuid.uuid4().hex,
             index_version=self._index_version,
             timings=timings,
+        )
+        self._log_search(auth, response)
+        return response
+
+    @staticmethod
+    def _log_search(auth: AuthContext, response: SearchResponse) -> None:
+        """Emit one structured record per search: ids and timings only, never text (R-22)."""
+        t = response.timings
+        _LOG.info(
+            "search",
+            extra={
+                "request_id": response.request_id,
+                "tenant_id": auth.tenant_id,
+                "principal": auth.principal,
+                "result_ids": [r.result_id for r in response.results],
+                "index_version": response.index_version,
+                "embed_ms": t.embed_ms,
+                "search_ms": t.search_ms,
+                "fuse_ms": t.fuse_ms,
+                "expand_ms": t.expand_ms,
+                "rerank_ms": t.rerank_ms,
+                "total_ms": t.total_ms,
+                "tool": "search",
+            },
         )
 
     @staticmethod
@@ -109,7 +137,7 @@ class RetrievalService:
             return SearchResult(
                 result_id=hit.result_id,
                 result_type="chunk",
-                text=hit.chunk.text,
+                text=wrap_retrieved(hit.result_id, "chunk", hit.chunk.text),
                 score=hit.score,
                 provenance=[prov],
                 via=candidate.via,
@@ -118,7 +146,9 @@ class RetrievalService:
         return SearchResult(
             result_id=hit.result_id,
             result_type="concept",
-            text="; ".join(concept.claims) if concept else "",
+            text=wrap_retrieved(
+                hit.result_id, "concept", "; ".join(concept.claims) if concept else ""
+            ),
             score=hit.score,
             provenance=list(concept.sources) if concept else [],
             verified=concept.verified if concept else False,

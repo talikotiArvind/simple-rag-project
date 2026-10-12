@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 from typing import TYPE_CHECKING
 
+from rag_core.envelope import validate_envelope_id
 from rag_core.exceptions import ValidationError
 from rag_core.models import Chunk, DeleteReport, IngestReport
 
@@ -37,15 +38,17 @@ class IngestPipeline:
         info = self._sources.describe_source(source_uri)
         raw = self._sources.read_source(source_uri)
         version = hashlib.sha256(raw).hexdigest()
+        validate_envelope_id(info.doc_id)  # R-17: rejected at ingest
         pieces = self._chunker(raw.decode("utf-8"))
         report = IngestReport(doc_id=info.doc_id, index_version=self._index_version)
         indexed = self._index.document_version(info.tenant_id, info.doc_id, self._index_version)
         if indexed == version:
             report.chunks_skipped = len(pieces)
             return report
+        # Embed first: a failure here must leave the previous chunks searchable (FR-03).
+        chunks = self._build_chunks(info.tenant_id, info.doc_id, source_uri, version, pieces)
         if indexed is not None:
             self._index.delete_document(info.tenant_id, info.doc_id, self._index_version)
-        chunks = self._build_chunks(info.tenant_id, info.doc_id, source_uri, version, pieces)
         self._index.upsert(chunks, self._index_version)
         report.chunks_written = len(chunks)
         return report
@@ -65,7 +68,7 @@ class IngestPipeline:
         for position, (text, vector) in enumerate(zip(pieces, vectors, strict=True)):
             chunks.append(
                 Chunk(
-                    chunk_id=f"{doc_id}#{position}",
+                    chunk_id=f"{doc_id}:{position}",
                     doc_id=doc_id,
                     tenant_id=tenant_id,
                     text=text,
