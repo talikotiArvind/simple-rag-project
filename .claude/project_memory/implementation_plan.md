@@ -34,7 +34,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - User creates local `.env` from `.env.example` (OPENAI_API_KEY, ANTHROPIC_API_KEY, rerank key, AWS profile) and adds GitHub Actions secrets. Agents never read or enter real keys. Phase 0 CI must pass with NO secrets (smoke pipeline uses fakes). Real-key usage starts Phase 1.
 
 ## Phase 0.1: Scaffold (sequential)
-- [ ] TASK-01: Repo scaffold and tooling config
+- [x] TASK-01: Repo scaffold and tooling config
   - Files: `pyproject.toml` (pytest testpaths=test, ruff, mypy strict for `rag_core`, `evals`), empty-package `__init__.py` for `rag_core/`, `rag_core/store/`, `rag_core/ingest/`, `rag_core/okf/`, `rag_core/ranking/`, `adapters/`, `mcp_server/`, `evals/`, `tools/`, `test/rag_core/`; `knowledge/.gitkeep`, `infra/.gitkeep`, `examples/.gitkeep`
   - Build: layout from design.md "Repo Layout". Owns every `__init__.py` so later parallel tasks never touch them (parallelism rule). Must not alter `src/resource/` or existing `test/`.
   - Input: design.md. Output: tree above; `ruff` and `mypy` pass on empty packages.
@@ -42,7 +42,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Sub-agent: coding-agent
 
 ## Phase 0.2: Retrieval contract (sequential)
-- [ ] TASK-02: Contract models `rag_core/models.py`
+- [x] TASK-02: Contract models `rag_core/models.py`
   - Build: exactly the design.md contract: `AuthContext` (frozen), `SearchRequest` (validates on construction: non-empty query, 1<=top_k<=50, 0<=max_expansions<=10, filter keys from `ALLOWED_FILTER_KEYS` allow-list, `tenant_id` forbidden), `Provenance`, `SearchResult`, `SearchResponse`; plus `Chunk`, `Concept`, `Hit`, `Candidate`, `RankedLists`, `IngestReport`, `DeleteReport`, `StageTimings`, `DocumentView`, `SourceInfo`. `field(default_factory=...)` for mutables. Helper `sort_results()` implementing `(-score, result_id)` + dedupe by `result_id`.
   - Depends on: TASK-01. Output: `rag_core/models.py`. No I/O, no SDK imports.
   - Parallel group: PARALLEL-GROUP-NONE
@@ -121,8 +121,8 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-H3 | blocked-on-user | NONE | needs H2, TASK-06 |
 | TASK-H4 | blocked-on-user | NONE | needs H2, TASK-06 |
 | TASK-H5 | blocked-on-user | NONE | secrets; not needed for Phase 0 CI |
-| TASK-01 | pending | NONE | |
-| TASK-02 | pending | NONE | |
+| TASK-01 | done | NONE | |
+| TASK-02 | done | NONE | |
 | TASK-03 | pending | A | |
 | TASK-04 | pending | A | |
 | TASK-05 | pending | A | |
