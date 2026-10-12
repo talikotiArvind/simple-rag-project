@@ -81,7 +81,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Build: pure functions per the fixed definitions: `recall_at_k(ranked_doc_ids, relevant_doc_ids, k=5)` (per-question; chunks of one doc counted once, dedupe preserving rank), `mean_recall`, `reciprocal_rank`, `mrr`, `abstention_correct(results, threshold)` for unanswerable questions (scored separately, excluded from recall/MRR averages), `citation_valid(citation, ...)` stub encoding the 4 conditions with injected lookups. Breakdown by qtype.
   - Depends on: TASK-06. Output: `evals/metrics.py`. Worktree: `.claude/worktrees/task-09/`  Merge order: 2
   - Sub-agent: coding-agent
-- [ ] TASK-10: Set validator CLI `evals/validate_sets.py` <- PARALLEL-GROUP_B
+- [x] TASK-10: Set validator CLI `evals/validate_sets.py` <- PARALLEL-GROUP_B
   - Build: `python -m evals.validate_sets --dev evals/dev_set.jsonl --heldout evals/heldout_set.jsonl --manifest corpus/manifest.json`; enforces dev has exactly 50 questions, held-out >= 30 (configurable), type mix present in both (>=1 of each type), disjointness, schema validity; prints summary; exit 1 on failure. Also `--allow-missing` flag used only before TASK-H3/H4 land (CI gate step must NOT use it after TASK-18).
   - Depends on: TASK-06. Worktree: `.claude/worktrees/task-10/`  Merge order: 3
   - Sub-agent: coding-agent
@@ -126,11 +126,11 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-03 | done | A | |
 | TASK-04 | done | A | |
 | TASK-05 | done | A | |
-| TASK-06 | pending | A | |
+| TASK-06 | done | A | |
 | TASK-07 | done | A | |
 | TASK-08 | done | B | feat/tenant-scoped-store |
 | TASK-09 | done | B | |
-| TASK-10 | pending | B | |
+| TASK-10 | done | B | feat/validate-sets |
 | TASK-11 | pending | NONE | |
 | TASK-12..17 | pending | C | |
 | TASK-18 | blocked-on-user | NONE | |
