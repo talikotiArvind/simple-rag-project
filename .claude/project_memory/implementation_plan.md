@@ -106,7 +106,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Depends on: TASK-H3, TASK-H4, TASK-10. Action: commit `evals/dev_set.jsonl` and `evals/heldout_set.jsonl`; `validate_sets` passes with no `--allow-missing`. (Human-authored; agent only runs validator and commits on user's request.)
 - [ ] TASK-19: Commit corpus manifest and docs `[BLOCKED-ON-USER]`
   - Depends on: TASK-H2. Output: `corpus/manifest.json` (+ `corpus/` files or S3 URIs). Needed for validator doc-id checks.
-- [ ] TASK-21: CI workflow `.github/workflows/ci.yml`
+- [x] TASK-21: CI workflow `.github/workflows/ci.yml`
   - Build: triggers `push` to main + `pull_request`; Python 3.12; `pip install -r requirements.txt`; steps in order: (1) `python tools/check_imports.py` (D-005, blocking), (2) `ruff check rag_core evals tools adapters mcp_server`, (3) `mypy rag_core evals tools`, (4) `python -m evals.validate_sets ...` (blocking once TASK-18 lands; `--allow-missing` before), (5) `pytest test -q --cov=rag_core --cov=evals --cov-fail-under=80` (tenant-isolation tests included), (6) `python -m evals.run_pipeline_smoke` (the empty end-to-end pipeline). No secrets referenced anywhere. Does not modify the existing `python-checks.yml` / `unit-test.yml`.
   - Depends on: TASK-05, TASK-10, TASK-11, TASK-14, TASK-17. Parallel group: PARALLEL-GROUP-NONE. Sub-agent: coding-agent
 - [ ] TASK-20: EXIT GATE: Phase 0
@@ -140,7 +140,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-17 | done (1 spec-divergence failure: embedder failure on changed re-ingest drops old chunks) | C | test/pipeline-smoke |
 | TASK-18 | blocked-on-user | NONE | |
 | TASK-19 | blocked-on-user | NONE | |
-| TASK-21 | pending | NONE | |
+| TASK-21 | done | NONE | ci.yml; validate_sets step uses --allow-missing until TASK-18/19 |
 | TASK-20 | pending | NONE | exit gate |
 
 ## Parallelism Summary
