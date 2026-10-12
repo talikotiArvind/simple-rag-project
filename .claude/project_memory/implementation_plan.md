@@ -87,7 +87,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Sub-agent: coding-agent
 
 ## Phase 0.5: Empty pipeline (sequential)
-- [ ] TASK-11: Null pipeline and smoke runner
+- [x] TASK-11: Null pipeline and smoke runner
   - Files: `rag_core/retrieve.py` (`RetrievalService.search(auth, request)` orchestrating embed > scoped search > fuse > rerank via Protocols, records `StageTimings`, returns `SearchResponse` with `index_version`), `rag_core/ingest_pipeline.py` (`IngestPipeline.ingest/delete` orchestrating Protocols; idempotent on content hash), `evals/fakes.py` (in-memory `NullEmbedder`, `InMemoryHybridIndex` with tenant-tagged docs, `NullReranker`), `evals/run_pipeline_smoke.py` (ingest 2 tiny fixture docs for 2 tenants, run 1 search each, assert contract shape, determinism on repeat, no cross-tenant results; exit 0/1).
   - Depends on: TASK-04, TASK-08, TASK-09 (metrics used to compute recall on the fixture). Orchestration only: no ranking logic here (RRF/EvidenceScorer are Phase 1+; use identity fuse via Protocol default).
   - Parallel group: PARALLEL-GROUP-NONE
@@ -131,7 +131,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-08 | done | B | feat/tenant-scoped-store |
 | TASK-09 | done | B | |
 | TASK-10 | done | B | feat/validate-sets |
-| TASK-11 | pending | NONE | |
+| TASK-11 | done | NONE | feat/null-pipeline |
 | TASK-12..17 | pending | C | |
 | TASK-18 | blocked-on-user | NONE | |
 | TASK-19 | blocked-on-user | NONE | |
