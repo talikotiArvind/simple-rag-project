@@ -99,7 +99,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 - [x] TASK-14: `test/rag_core/test_tenant_isolation.py` <- PARALLEL-GROUP-C  (depends TASK-08, TASK-07; tenant-isolation skeleton: base class `TenantIsolationContract` with one test per row of the authz matrix. Phase 0 enables search + document + concept rows against fakes; graph-hop, adapter and MCP rows are present as `@unittest.skip("Phase N: ...")` with reason, so later phases only unskip. Must assert zero cross-tenant results and that a caller-supplied `tenant_id` is rejected)  Worktree: `.claude/worktrees/task-14/`  Merge order: 3  Sub-agent: unit-test
 - [x] TASK-15: `test/evals/test_metrics.py` + `test/evals/test_schema.py` <- PARALLEL-GROUP-C  (depends TASK-06, TASK-09, TASK-10; hand-computed recall/MRR cases, duplicate-chunk-counts-once, unanswerable excluded, validator failure cases)  Worktree: `.claude/worktrees/task-15/`  Merge order: 4  Sub-agent: unit-test
 - [x] TASK-16: `test/rag_core/test_config.py` <- PARALLEL-GROUP-C  (depends TASK-04; secret repr redaction, missing-secret fail-fast, env isolation via patched `os.environ`)  Worktree: `.claude/worktrees/task-16/`  Merge order: 5  Sub-agent: unit-test
-- [ ] TASK-17: `test/rag_core/test_pipeline_smoke.py` <- PARALLEL-GROUP-C  (depends TASK-11; idempotent re-ingest, stage timings present, `index_version` set, deterministic repeat, deletion removes chunks)  Worktree: `.claude/worktrees/task-17/`  Merge order: 6  Sub-agent: unit-test
+- [x] TASK-17: `test/rag_core/test_pipeline_smoke.py` <- PARALLEL-GROUP-C  (depends TASK-11; idempotent re-ingest, stage timings present, `index_version` set, deterministic repeat, deletion removes chunks)  Worktree: `.claude/worktrees/task-17/`  Merge order: 6  Sub-agent: unit-test
 
 ## Phase 0.7: CI and gate (sequential)
 - [ ] TASK-18: Commit eval sets `[BLOCKED-ON-USER]`
@@ -137,7 +137,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-14 | done (3 spec-divergence failures: AZ-03, AZ-12, AZ-14) | C | test/tenant-isolation |
 | TASK-15 | done | C | test/eval-metrics-schema |
 | TASK-16 | done | C | test/config |
-| TASK-17 | pending | C | |
+| TASK-17 | done (1 spec-divergence failure: embedder failure on changed re-ingest drops old chunks) | C | test/pipeline-smoke |
 | TASK-18 | blocked-on-user | NONE | |
 | TASK-19 | blocked-on-user | NONE | |
 | TASK-21 | pending | NONE | |
