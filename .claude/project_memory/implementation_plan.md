@@ -73,7 +73,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Sub-agent: coding-agent (docs task)
 
 ## Phase 0.4: Group B (after Group A merged; depend on A outputs)
-- [ ] TASK-08: Tenant-scoped store skeleton `rag_core/store/scoped_store.py` <- PARALLEL-GROUP-B
+- [x] TASK-08: Tenant-scoped store skeleton `rag_core/store/scoped_store.py` <- PARALLEL-GROUP-B
   - Build: `TenantScopedStore` wrapping a `HybridIndex`, `SourceStore`, `ConceptRepository` (Protocols only, no SDK imports). Injects `tenant_id` filter into the index query (never post-filter), rejects any caller-supplied `tenant_id` filter, takes `AuthContext` on every method, raises `AuthorizationError` on missing/empty tenant. Concept/document fetch checks node tenant.
   - Depends on: TASK-03 (and TASK-07 for rules). Worktree: `.claude/worktrees/task-08/`  Merge order: 1
   - Sub-agent: coding-agent
@@ -128,7 +128,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-05 | done | A | |
 | TASK-06 | pending | A | |
 | TASK-07 | done | A | |
-| TASK-08 | pending | B | |
+| TASK-08 | done | B | feat/tenant-scoped-store |
 | TASK-09 | pending | B | |
 | TASK-10 | pending | B | |
 | TASK-11 | pending | NONE | |

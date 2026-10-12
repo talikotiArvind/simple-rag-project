@@ -14,5 +14,9 @@ class AuthorizationError(RagCoreError):
     """Raised when a caller is not permitted to access a tenant or resource."""
 
 
+class NotFoundError(RagCoreError):
+    """Raised for a missing resource or one the caller's tenant may not see (indistinguishable)."""
+
+
 class ConfigError(RagCoreError):
     """Raised when required configuration is missing or invalid."""

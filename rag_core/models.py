@@ -129,6 +129,7 @@ class Concept:
     sources: list[Provenance] = field(default_factory=list)
     verified: bool = False
     edges: dict[str, list[str]] = field(default_factory=dict)
+    tenant_id: str = ""  # empty = unowned; TenantScopedStore fails closed on it
 
 
 @dataclass
@@ -184,6 +185,7 @@ class DocumentView:
     doc_id: str
     text: str
     provenance: Provenance
+    tenant_id: str = ""
 
 
 @dataclass(frozen=True)
@@ -193,6 +195,7 @@ class SourceInfo:
     doc_id: str
     source_uri: str
     title: str = ""
+    tenant_id: str = ""
 
 
 def sort_results(results: Iterable[SearchResult]) -> list[SearchResult]:
