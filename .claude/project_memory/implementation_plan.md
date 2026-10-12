@@ -67,7 +67,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Build: `EvalQuestion` (question_id, question, qtype in {single_fact, multi_hop, unanswerable}, expected_answer, relevant_doc_ids: list[str] (empty iff unanswerable), tenant_id, notes) ; `EvalSet` with `load_jsonl(path)` that validates: unique ids, unanswerable has no relevant docs and answerable has >=1, multi-hop has >=2, doc ids exist in `corpus/manifest.json` (when supplied), no question text shared between dev and held-out sets (`assert_disjoint`).
   - Depends on: TASK-02. Output: `evals/schema.py`. Worktree: `.claude/worktrees/task-06/`  Merge order: 4
   - Sub-agent: coding-agent
-- [ ] TASK-07: Provenance and authorization rules doc `docs/authz_provenance.md` <- PARALLEL-GROUP-A
+- [x] TASK-07: Provenance and authorization rules doc `docs/authz_provenance.md` <- PARALLEL-GROUP-A
   - Build: normative rules derived from NFR-02/03, D-001..D-004, FR-15: identity only from credentials; tenant filter inside query; per-node authz on graph hops/concepts/documents; `source_version` = content hash; citation validity (4 conditions from metric definitions); delimiter format for returned text; log fields (no raw text). Includes a numbered "authorization test matrix" (surface x operation) that TASK-14 and later phases implement. Docs only; no code.
   - Depends on: TASK-02. Output: `docs/authz_provenance.md`. Worktree: `.claude/worktrees/task-07/`  Merge order: 5
   - Sub-agent: coding-agent (docs task)
@@ -127,7 +127,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-04 | done | A | |
 | TASK-05 | done | A | |
 | TASK-06 | pending | A | |
-| TASK-07 | pending | A | |
+| TASK-07 | done | A | |
 | TASK-08 | pending | B | |
 | TASK-09 | pending | B | |
 | TASK-10 | pending | B | |
