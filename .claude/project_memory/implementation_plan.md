@@ -94,7 +94,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Sub-agent: coding-agent
 
 ## Phase 0.6: Tests (Group C, one unit-test agent per module; written to spec, blind maker-checker)
-- [ ] TASK-12: `test/rag_core/test_models.py` <- PARALLEL-GROUP-C  (depends TASK-02; validation limits, allow-list, tenant_id forbidden, ordering/dedupe determinism)  Worktree: `.claude/worktrees/task-12/`  Merge order: 1  Sub-agent: unit-test
+- [x] TASK-12: `test/rag_core/test_models.py` <- PARALLEL-GROUP-C  (depends TASK-02; validation limits, allow-list, tenant_id forbidden, ordering/dedupe determinism)  Worktree: `.claude/worktrees/task-12/`  Merge order: 1  Sub-agent: unit-test
 - [ ] TASK-13: `test/tools/test_check_imports.py` <- PARALLEL-GROUP-C  (depends TASK-05; temp-dir fixtures prove each D-005 rule fires and clean trees pass; also asserts the real repo's `rag_core/` is clean)  Worktree: `.claude/worktrees/task-13/`  Merge order: 2  Sub-agent: unit-test
 - [ ] TASK-14: `test/rag_core/test_tenant_isolation.py` <- PARALLEL-GROUP-C  (depends TASK-08, TASK-07; tenant-isolation skeleton: base class `TenantIsolationContract` with one test per row of the authz matrix. Phase 0 enables search + document + concept rows against fakes; graph-hop, adapter and MCP rows are present as `@unittest.skip("Phase N: ...")` with reason, so later phases only unskip. Must assert zero cross-tenant results and that a caller-supplied `tenant_id` is rejected)  Worktree: `.claude/worktrees/task-14/`  Merge order: 3  Sub-agent: unit-test
 - [ ] TASK-15: `test/evals/test_metrics.py` + `test/evals/test_schema.py` <- PARALLEL-GROUP-C  (depends TASK-06, TASK-09, TASK-10; hand-computed recall/MRR cases, duplicate-chunk-counts-once, unanswerable excluded, validator failure cases)  Worktree: `.claude/worktrees/task-15/`  Merge order: 4  Sub-agent: unit-test
@@ -132,7 +132,8 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-09 | done | B | |
 | TASK-10 | done | B | feat/validate-sets |
 | TASK-11 | done | NONE | feat/null-pipeline |
-| TASK-12..17 | pending | C | |
+| TASK-12 | done | C | test/models |
+| TASK-13..17 | pending | C | |
 | TASK-18 | blocked-on-user | NONE | |
 | TASK-19 | blocked-on-user | NONE | |
 | TASK-21 | pending | NONE | |
