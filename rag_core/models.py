@@ -5,7 +5,7 @@ from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
 from typing import Any, Literal
 
-from rag_core.exceptions import ValidationError
+from rag_core.exceptions import InvalidAuthContextError, ValidationError
 
 ALLOWED_FILTER_KEYS: frozenset[str] = frozenset(
     {"doc_type", "source", "language", "updated_after"}
@@ -25,9 +25,9 @@ class AuthContext:
 
     def __post_init__(self) -> None:
         if not self.tenant_id.strip():
-            raise ValidationError("tenant_id must not be empty")
+            raise InvalidAuthContextError("tenant_id must not be empty")
         if not self.principal.strip():
-            raise ValidationError("principal must not be empty")
+            raise InvalidAuthContextError("principal must not be empty")
 
 
 @dataclass
@@ -91,6 +91,11 @@ class StageTimings:
     fuse_ms: float = 0.0
     expand_ms: float = 0.0
     rerank_ms: float = 0.0
+
+    @property
+    def total_ms(self) -> float:
+        """Sum of all stage latencies."""
+        return self.embed_ms + self.search_ms + self.fuse_ms + self.expand_ms + self.rerank_ms
 
 
 @dataclass
