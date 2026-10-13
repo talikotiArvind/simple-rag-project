@@ -1,0 +1,58 @@
+name: CI
+
+# Phase 0 gate: D-005 import boundary, lint, strict types, eval-set validation,
+# tests (incl. tenant isolation) with a coverage floor, and the empty end-to-end
+# pipeline. No secrets are referenced anywhere; the smoke pipeline uses in-memory fakes.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Import boundaries (D-005)
+        run: python tools/check_imports.py
+
+      - name: Ruff
+        run: ruff check rag_core evals tools adapters mcp_server
+
+      - name: Mypy (strict, config in pyproject.toml)
+        run: mypy
+
+      # TEMPORARY: --allow-missing until the dev/held-out sets and corpus manifest are
+      # committed (TASK-18/19). Remove the flag then, so a missing or invalid set fails CI.
+      - name: Validate eval sets
+        run: |
+          python -m evals.validate_sets \
+            --dev evals/dev_set.jsonl \
+            --heldout evals/heldout_set.jsonl \
+            --manifest corpus/manifest.json \
+            --allow-missing
+
+      - name: Tests with coverage floor (includes tenant isolation)
+        run: |
+          python -m pytest test -q \
+            --cov=rag_core --cov=evals --cov-branch --cov-fail-under=80
+
+      - name: Empty end-to-end pipeline (smoke)
+        run: python -m evals.run_pipeline_smoke

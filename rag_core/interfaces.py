@@ -53,6 +53,14 @@ class HybridIndex(Protocol):
         """Swap the live alias to index_version; rollback is promote(previous)."""
         ...
 
+    def document_version(self, tenant_id: str, doc_id: str, index_version: str) -> str | None:
+        """Return the source version (content hash) indexed for a document, or None."""
+        ...
+
+    def delete_document(self, tenant_id: str, doc_id: str, index_version: str) -> int:
+        """Remove all chunks of a document from the version; return how many were removed."""
+        ...
+
 
 @runtime_checkable
 class Reranker(Protocol):
@@ -79,6 +87,14 @@ class SourceStore(Protocol):
 
     def read_source(self, source_uri: str) -> bytes:
         """Read raw bytes for ingestion (trusted pipeline path, no caller identity)."""
+        ...
+
+    def describe_source(self, source_uri: str) -> SourceInfo:
+        """Return manifest metadata (doc_id, tenant_id) for a source (trusted pipeline path)."""
+        ...
+
+    def describe_document(self, doc_id: str) -> SourceInfo:
+        """Return manifest metadata for a doc_id (trusted pipeline path)."""
         ...
 
 

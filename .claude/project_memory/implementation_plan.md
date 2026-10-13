@@ -73,40 +73,40 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Sub-agent: coding-agent (docs task)
 
 ## Phase 0.4: Group B (after Group A merged; depend on A outputs)
-- [ ] TASK-08: Tenant-scoped store skeleton `rag_core/store/scoped_store.py` <- PARALLEL-GROUP-B
+- [x] TASK-08: Tenant-scoped store skeleton `rag_core/store/scoped_store.py` <- PARALLEL-GROUP-B
   - Build: `TenantScopedStore` wrapping a `HybridIndex`, `SourceStore`, `ConceptRepository` (Protocols only, no SDK imports). Injects `tenant_id` filter into the index query (never post-filter), rejects any caller-supplied `tenant_id` filter, takes `AuthContext` on every method, raises `AuthorizationError` on missing/empty tenant. Concept/document fetch checks node tenant.
   - Depends on: TASK-03 (and TASK-07 for rules). Worktree: `.claude/worktrees/task-08/`  Merge order: 1
   - Sub-agent: coding-agent
-- [ ] TASK-09: Metrics `evals/metrics.py` <- PARALLEL-GROUP-B
+- [x] TASK-09: Metrics `evals/metrics.py` <- PARALLEL-GROUP-B
   - Build: pure functions per the fixed definitions: `recall_at_k(ranked_doc_ids, relevant_doc_ids, k=5)` (per-question; chunks of one doc counted once, dedupe preserving rank), `mean_recall`, `reciprocal_rank`, `mrr`, `abstention_correct(results, threshold)` for unanswerable questions (scored separately, excluded from recall/MRR averages), `citation_valid(citation, ...)` stub encoding the 4 conditions with injected lookups. Breakdown by qtype.
   - Depends on: TASK-06. Output: `evals/metrics.py`. Worktree: `.claude/worktrees/task-09/`  Merge order: 2
   - Sub-agent: coding-agent
-- [ ] TASK-10: Set validator CLI `evals/validate_sets.py` <- PARALLEL-GROUP_B
+- [x] TASK-10: Set validator CLI `evals/validate_sets.py` <- PARALLEL-GROUP_B
   - Build: `python -m evals.validate_sets --dev evals/dev_set.jsonl --heldout evals/heldout_set.jsonl --manifest corpus/manifest.json`; enforces dev has exactly 50 questions, held-out >= 30 (configurable), type mix present in both (>=1 of each type), disjointness, schema validity; prints summary; exit 1 on failure. Also `--allow-missing` flag used only before TASK-H3/H4 land (CI gate step must NOT use it after TASK-18).
   - Depends on: TASK-06. Worktree: `.claude/worktrees/task-10/`  Merge order: 3
   - Sub-agent: coding-agent
 
 ## Phase 0.5: Empty pipeline (sequential)
-- [ ] TASK-11: Null pipeline and smoke runner
+- [x] TASK-11: Null pipeline and smoke runner
   - Files: `rag_core/retrieve.py` (`RetrievalService.search(auth, request)` orchestrating embed > scoped search > fuse > rerank via Protocols, records `StageTimings`, returns `SearchResponse` with `index_version`), `rag_core/ingest_pipeline.py` (`IngestPipeline.ingest/delete` orchestrating Protocols; idempotent on content hash), `evals/fakes.py` (in-memory `NullEmbedder`, `InMemoryHybridIndex` with tenant-tagged docs, `NullReranker`), `evals/run_pipeline_smoke.py` (ingest 2 tiny fixture docs for 2 tenants, run 1 search each, assert contract shape, determinism on repeat, no cross-tenant results; exit 0/1).
   - Depends on: TASK-04, TASK-08, TASK-09 (metrics used to compute recall on the fixture). Orchestration only: no ranking logic here (RRF/EvidenceScorer are Phase 1+; use identity fuse via Protocol default).
   - Parallel group: PARALLEL-GROUP-NONE
   - Sub-agent: coding-agent
 
 ## Phase 0.6: Tests (Group C, one unit-test agent per module; written to spec, blind maker-checker)
-- [ ] TASK-12: `test/rag_core/test_models.py` <- PARALLEL-GROUP-C  (depends TASK-02; validation limits, allow-list, tenant_id forbidden, ordering/dedupe determinism)  Worktree: `.claude/worktrees/task-12/`  Merge order: 1  Sub-agent: unit-test
-- [ ] TASK-13: `test/tools/test_check_imports.py` <- PARALLEL-GROUP-C  (depends TASK-05; temp-dir fixtures prove each D-005 rule fires and clean trees pass; also asserts the real repo's `rag_core/` is clean)  Worktree: `.claude/worktrees/task-13/`  Merge order: 2  Sub-agent: unit-test
-- [ ] TASK-14: `test/rag_core/test_tenant_isolation.py` <- PARALLEL-GROUP-C  (depends TASK-08, TASK-07; tenant-isolation skeleton: base class `TenantIsolationContract` with one test per row of the authz matrix. Phase 0 enables search + document + concept rows against fakes; graph-hop, adapter and MCP rows are present as `@unittest.skip("Phase N: ...")` with reason, so later phases only unskip. Must assert zero cross-tenant results and that a caller-supplied `tenant_id` is rejected)  Worktree: `.claude/worktrees/task-14/`  Merge order: 3  Sub-agent: unit-test
-- [ ] TASK-15: `test/evals/test_metrics.py` + `test/evals/test_schema.py` <- PARALLEL-GROUP-C  (depends TASK-06, TASK-09, TASK-10; hand-computed recall/MRR cases, duplicate-chunk-counts-once, unanswerable excluded, validator failure cases)  Worktree: `.claude/worktrees/task-15/`  Merge order: 4  Sub-agent: unit-test
-- [ ] TASK-16: `test/rag_core/test_config.py` <- PARALLEL-GROUP-C  (depends TASK-04; secret repr redaction, missing-secret fail-fast, env isolation via patched `os.environ`)  Worktree: `.claude/worktrees/task-16/`  Merge order: 5  Sub-agent: unit-test
-- [ ] TASK-17: `test/rag_core/test_pipeline_smoke.py` <- PARALLEL-GROUP-C  (depends TASK-11; idempotent re-ingest, stage timings present, `index_version` set, deterministic repeat, deletion removes chunks)  Worktree: `.claude/worktrees/task-17/`  Merge order: 6  Sub-agent: unit-test
+- [x] TASK-12: `test/rag_core/test_models.py` <- PARALLEL-GROUP-C  (depends TASK-02; validation limits, allow-list, tenant_id forbidden, ordering/dedupe determinism)  Worktree: `.claude/worktrees/task-12/`  Merge order: 1  Sub-agent: unit-test
+- [x] TASK-13: `test/tools/test_check_imports.py` <- PARALLEL-GROUP-C  (depends TASK-05; temp-dir fixtures prove each D-005 rule fires and clean trees pass; also asserts the real repo's `rag_core/` is clean)  Worktree: `.claude/worktrees/task-13/`  Merge order: 2  Sub-agent: unit-test
+- [x] TASK-14: `test/rag_core/test_tenant_isolation.py` <- PARALLEL-GROUP-C  (depends TASK-08, TASK-07; tenant-isolation skeleton: base class `TenantIsolationContract` with one test per row of the authz matrix. Phase 0 enables search + document + concept rows against fakes; graph-hop, adapter and MCP rows are present as `@unittest.skip("Phase N: ...")` with reason, so later phases only unskip. Must assert zero cross-tenant results and that a caller-supplied `tenant_id` is rejected)  Worktree: `.claude/worktrees/task-14/`  Merge order: 3  Sub-agent: unit-test
+- [x] TASK-15: `test/evals/test_metrics.py` + `test/evals/test_schema.py` <- PARALLEL-GROUP-C  (depends TASK-06, TASK-09, TASK-10; hand-computed recall/MRR cases, duplicate-chunk-counts-once, unanswerable excluded, validator failure cases)  Worktree: `.claude/worktrees/task-15/`  Merge order: 4  Sub-agent: unit-test
+- [x] TASK-16: `test/rag_core/test_config.py` <- PARALLEL-GROUP-C  (depends TASK-04; secret repr redaction, missing-secret fail-fast, env isolation via patched `os.environ`)  Worktree: `.claude/worktrees/task-16/`  Merge order: 5  Sub-agent: unit-test
+- [x] TASK-17: `test/rag_core/test_pipeline_smoke.py` <- PARALLEL-GROUP-C  (depends TASK-11; idempotent re-ingest, stage timings present, `index_version` set, deterministic repeat, deletion removes chunks)  Worktree: `.claude/worktrees/task-17/`  Merge order: 6  Sub-agent: unit-test
 
 ## Phase 0.7: CI and gate (sequential)
 - [ ] TASK-18: Commit eval sets `[BLOCKED-ON-USER]`
   - Depends on: TASK-H3, TASK-H4, TASK-10. Action: commit `evals/dev_set.jsonl` and `evals/heldout_set.jsonl`; `validate_sets` passes with no `--allow-missing`. (Human-authored; agent only runs validator and commits on user's request.)
 - [ ] TASK-19: Commit corpus manifest and docs `[BLOCKED-ON-USER]`
   - Depends on: TASK-H2. Output: `corpus/manifest.json` (+ `corpus/` files or S3 URIs). Needed for validator doc-id checks.
-- [ ] TASK-21: CI workflow `.github/workflows/ci.yml`
+- [x] TASK-21: CI workflow `.github/workflows/ci.yml`
   - Build: triggers `push` to main + `pull_request`; Python 3.12; `pip install -r requirements.txt`; steps in order: (1) `python tools/check_imports.py` (D-005, blocking), (2) `ruff check rag_core evals tools adapters mcp_server`, (3) `mypy rag_core evals tools`, (4) `python -m evals.validate_sets ...` (blocking once TASK-18 lands; `--allow-missing` before), (5) `pytest test -q --cov=rag_core --cov=evals --cov-fail-under=80` (tenant-isolation tests included), (6) `python -m evals.run_pipeline_smoke` (the empty end-to-end pipeline). No secrets referenced anywhere. Does not modify the existing `python-checks.yml` / `unit-test.yml`.
   - Depends on: TASK-05, TASK-10, TASK-11, TASK-14, TASK-17. Parallel group: PARALLEL-GROUP-NONE. Sub-agent: coding-agent
 - [ ] TASK-20: EXIT GATE: Phase 0
@@ -126,16 +126,21 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-03 | done | A | |
 | TASK-04 | done | A | |
 | TASK-05 | done | A | |
-| TASK-06 | pending | A | |
+| TASK-06 | done | A | |
 | TASK-07 | done | A | |
-| TASK-08 | pending | B | |
-| TASK-09 | pending | B | |
-| TASK-10 | pending | B | |
-| TASK-11 | pending | NONE | |
-| TASK-12..17 | pending | C | |
+| TASK-08 | done | B | feat/tenant-scoped-store |
+| TASK-09 | done | B | |
+| TASK-10 | done | B | feat/validate-sets |
+| TASK-11 | done | NONE | feat/null-pipeline |
+| TASK-12 | done | C | test/models |
+| TASK-13 | done | C | test/import-checker |
+| TASK-14 | done (3 spec-divergence failures: AZ-03, AZ-12, AZ-14) | C | test/tenant-isolation |
+| TASK-15 | done | C | test/eval-metrics-schema |
+| TASK-16 | done | C | test/config |
+| TASK-17 | done (1 spec-divergence failure: embedder failure on changed re-ingest drops old chunks) | C | test/pipeline-smoke |
 | TASK-18 | blocked-on-user | NONE | |
 | TASK-19 | blocked-on-user | NONE | |
-| TASK-21 | pending | NONE | |
+| TASK-21 | done | NONE | ci.yml; validate_sets step uses --allow-missing until TASK-18/19 |
 | TASK-20 | pending | NONE | exit gate |
 
 ## Parallelism Summary
