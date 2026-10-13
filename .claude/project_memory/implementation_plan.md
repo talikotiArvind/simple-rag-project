@@ -49,7 +49,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Sub-agent: coding-agent
 
 ## Phase 0.3: Group A (after TASK-02; five independent files)
-- [ ] TASK-03: Protocols `rag_core/interfaces.py` <- PARALLEL-GROUP-A
+- [x] TASK-03: Protocols `rag_core/interfaces.py` <- PARALLEL-GROUP-A
   - Build: `Embedder`, `HybridIndex` (search/upsert/promote per design.md; every read takes `AuthContext`), `Reranker`, `SourceStore`, `ConceptRepository`, `Contextualizer` as `typing.Protocol`.
   - Depends on: TASK-02. Worktree: `.claude/worktrees/task-03/`  Merge order: 1
   - Sub-agent: coding-agent
@@ -123,7 +123,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-H5 | blocked-on-user | NONE | secrets; not needed for Phase 0 CI |
 | TASK-01 | done | NONE | |
 | TASK-02 | done | NONE | |
-| TASK-03 | pending | A | |
+| TASK-03 | done | A | |
 | TASK-04 | pending | A | |
 | TASK-05 | pending | A | |
 | TASK-06 | pending | A | |
