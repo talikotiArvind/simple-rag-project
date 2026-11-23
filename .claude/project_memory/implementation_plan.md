@@ -63,7 +63,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Depends on: TASK-01. Output: `tools/check_imports.py`
   - Worktree: `.claude/worktrees/task-05/`  Merge order: 3
   - Sub-agent: coding-agent
-- [ ] TASK-06: Eval schema and set loader `evals/schema.py` <- PARALLEL-GROUP-A
+- [x] TASK-06: Eval schema and set loader `evals/schema.py` <- PARALLEL-GROUP-A
   - Build: `EvalQuestion` (question_id, question, qtype in {single_fact, multi_hop, unanswerable}, expected_answer, relevant_doc_ids: list[str] (empty iff unanswerable), tenant_id, notes) ; `EvalSet` with `load_jsonl(path)` that validates: unique ids, unanswerable has no relevant docs and answerable has >=1, multi-hop has >=2, doc ids exist in `corpus/manifest.json` (when supplied), no question text shared between dev and held-out sets (`assert_disjoint`).
   - Depends on: TASK-02. Output: `evals/schema.py`. Worktree: `.claude/worktrees/task-06/`  Merge order: 4
   - Sub-agent: coding-agent
