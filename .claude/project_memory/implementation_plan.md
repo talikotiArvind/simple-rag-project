@@ -53,7 +53,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Build: `Embedder`, `HybridIndex` (search/upsert/promote per design.md; every read takes `AuthContext`), `Reranker`, `SourceStore`, `ConceptRepository`, `Contextualizer` as `typing.Protocol`.
   - Depends on: TASK-02. Worktree: `.claude/worktrees/task-03/`  Merge order: 1
   - Sub-agent: coding-agent
-- [ ] TASK-04: Config and secrets handling `rag_core/config.py` <- PARALLEL-GROUP-A
+- [x] TASK-04: Config and secrets handling `rag_core/config.py` <- PARALLEL-GROUP-A
   - Files: `rag_core/config.py`, `.env.example`, additions to `.gitignore` (`.env`, `*.pem`, `corpus/private/`)
   - Build: `Settings` typed dataclass loaded from env (python-dotenv already pinned): index name, embedding model, top_k defaults, `log_level`; secrets held as a `SecretStr`-style wrapper whose `repr` is redacted; fail-fast `ConfigError` for missing required values only when `require_secrets=True` (Phase 0 smoke runs with `False`). `.env.example` lists names only, no values. `.gitignore` is touched by this task only.
   - Depends on: TASK-02. Worktree: `.claude/worktrees/task-04/`  Merge order: 2
@@ -124,7 +124,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-01 | done | NONE | |
 | TASK-02 | done | NONE | |
 | TASK-03 | done | A | |
-| TASK-04 | pending | A | |
+| TASK-04 | done | A | |
 | TASK-05 | pending | A | |
 | TASK-06 | pending | A | |
 | TASK-07 | pending | A | |
