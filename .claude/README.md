@@ -35,5 +35,5 @@ python .claude/hooks/validate_pipeline.py
 
 ## Conventions
 - Use `PARALLEL-GROUP-*` labels consistently in plans.
-- Prefer `test/` as the default test directory for new tests. `tests/` also exists (legacy A2A protocol suites) — both directories run in CI via `pytest test tests` (`.github/workflows/unit-test.yml`); `tests/` is not deprecated, just not where new coding-agent tests should land.
+- `test/` is the only test directory. Provider base-agent and A2A tests live in `test/resource/`, whose `conftest.py` fakes `agents`/`google.generativeai` only when they are not installed; Claude tests skip with a reason when `anthropic` is missing, so `pytest` collects on a clean install. CI runs `pytest test` (`.github/workflows/unit-test.yml`).
 - Keep `.claude/settings.local.json` machine-agnostic (repo-relative paths only).

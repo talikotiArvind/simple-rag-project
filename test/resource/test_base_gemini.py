@@ -9,7 +9,6 @@ from pydantic import ValidationError
 
 from src.resource.base_gemini import BaseAgent
 
-
 # ---------------------------------------------------------------------------
 # Concrete subclass — BaseAgent is abstract (ABC), so we need a concrete
 # implementation to instantiate it in tests.

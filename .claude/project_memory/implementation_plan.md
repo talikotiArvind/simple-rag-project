@@ -2,7 +2,7 @@
 
 Scope: ONLY Phase 0 of `requirements.md` "Phases and Gates". Later phases get no tasks.
 Exit gate: dev + held-out sets committed; an empty pipeline runs end to end in CI (TASK-20).
-Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (CLAUDE.md); `tests/` is legacy, untouched.
+Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (CLAUDE.md); the legacy `tests/` suites were folded into `test/resource/`.
 
 ## Execution Strategy
 - Order: human decisions (H) and scaffold (Phase 0.1) -> contract -> parallel groups A/B/C -> CI -> gate.
@@ -155,7 +155,7 @@ Critical path: TASK-01 > 02 > 03 > 08 > 11 > 17 > 21 > 20. The user track (H1 > 
 - Corpus choice (OQ-01) and label authoring are the longest-lead items and cannot be automated; labels must be human-confirmed or SC-01 is meaningless. Mitigation: start H1 today; agent drafts candidate questions only after H2.
 - OQ-02 (OpenSearch vs pgvector) unresolved; mitigated because Phase 0 touches only Protocols and fakes. Must be decided before Phase 1.
 - Held-out set leakage: committed to the repo, so discipline is process-only. Mitigation: never run it before gates; the smoke pipeline and tests use only fixture data.
-- Existing `test/` vs `tests/` split: new tests go in `test/`; CI `pytest test` will not pick up `tests/`. Existing workflows are PR-only and diff-scoped; new `ci.yml` is separate to avoid regressions.
+- `test/` vs `tests/` split: resolved — `tests/` merged into `test/resource/`, so `pytest test` runs everything. Existing workflows are PR-only and diff-scoped; new `ci.yml` is separate to avoid regressions.
 - `pyproject.toml` (TASK-01) sets mypy strict only for new packages so the existing `src/resource` code does not start failing.
 - TASK-05 import checker can miss dynamic imports; acceptable for Phase 0, noted for review.
 - Part-time pace: Phase 0 is ~1 week only if H-track inputs arrive by mid-week; otherwise TASK-18/20 slip while code tasks finish early.
