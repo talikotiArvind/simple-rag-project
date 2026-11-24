@@ -55,3 +55,8 @@ Format:
 ## 2026-10-12 — D-008 MCP first, native adapters in Phase 4
 **Decision**: Resolved open question — MCP server with `search_knowledge` in Phase 1; Claude/OpenAI/Gemini adapters in Phase 4.
 **Rationale**: One working interface by week 3 de-risks the contract before tripling the surface.
+
+## 2026-10-12 — D-009 Text envelope applied in RetrievalService
+**Decision**: `RetrievalService` produces `SearchResult.text` already enveloped and escaped (`rag_core/envelope.py`, per docs/authz_provenance.md section 5, R-18/R-19); adapters and the API surface do not wrap. Chunk IDs become `{doc_id}:{position}` (R-17 forbids `#`), and `doc_id` is validated at ingest.
+**Rejected**: Wrapping at the API surface (design.md wording) — each surface would re-implement it, and same-evidence across surfaces (NFR-04) could not be guaranteed.
+**Consequences**: Raw text stays only in the store; `AuthContext` blank-field errors are `InvalidAuthContextError` (both `AuthorizationError` and `ValidationError`); search emits one INFO record on `rag_core.retrieve` (ids + timings, no text).
