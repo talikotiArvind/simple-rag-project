@@ -162,6 +162,29 @@ class TestIngestFailure(PipelineTestBase):
         self.assertTrue(self._search(self.acme, "alpha beta gamma refunds").results)
 
 
+class TestReviewMinors(PipelineTestBase):
+    """Review iteration 1 follow-ups: fail-fast validation instead of leaking raw errors."""
+
+    def test_non_utf8_source_raises_validation_error(self) -> None:
+        self.sources.add(
+            SourceInfo(doc_id="doc-bad", source_uri="mem://bad", tenant_id="acme"), b"\xff\xfe\xfa"
+        )
+        with self.assertRaises(ValidationError):
+            self.pipeline.ingest("mem://bad")
+
+    def test_non_positive_k_rejected_by_store(self) -> None:
+        self._ingest("mem://a")
+        store = TenantScopedStore(self.index, self.sources, InMemoryConceptRepository())
+        with self.assertRaises(ValidationError):
+            store.search(self.acme, [0.0], "alpha", 0, {})
+
+    def test_empty_embedder_result_raises_validation_error(self) -> None:
+        self._ingest("mem://a")
+        with patch.object(self.embedder, "embed", return_value=[]):
+            with self.assertRaises(ValidationError):
+                self._search(self.acme, "alpha")
+
+
 class TestDelete(PipelineTestBase):
     """FR-04: deletion removes every chunk of the document."""
 
