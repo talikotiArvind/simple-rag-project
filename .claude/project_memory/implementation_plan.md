@@ -114,6 +114,7 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
   - Depends on: TASK-18, TASK-19, TASK-21, TASK-H5 (only for confirming local setup, CI needs none). Parallel group: PARALLEL-GROUP-NONE. Sub-agent: none (planner/user sign-off; code-reviewer for the PR)
 
 ## Progress Tracking
+TASK-01..17 and TASK-21 are on `main` as of 2026-11-24 (stacked PRs #9-#19 landed via PR #8). Review follow-ups: `review_log.md` Iteration 1.
 | Task | Status | Parallel Group | Notes |
 |------|--------|---------------|-------|
 | TASK-H1 | blocked-on-user | NONE | OQ-01, OQ-02, OQ-04 |
@@ -134,13 +135,13 @@ Existing code: `src/resource/` (base agents + a2a) only. Tests live in `test/` (
 | TASK-11 | done | NONE | feat/null-pipeline |
 | TASK-12 | done | C | test/models |
 | TASK-13 | done | C | test/import-checker |
-| TASK-14 | done (3 spec-divergence failures: AZ-03, AZ-12, AZ-14) | C | test/tenant-isolation |
+| TASK-14 | done | C | test/tenant-isolation; AZ-03/12/14 divergences fixed in PR #18 |
 | TASK-15 | done | C | test/eval-metrics-schema |
 | TASK-16 | done | C | test/config |
-| TASK-17 | done (1 spec-divergence failure: embedder failure on changed re-ingest drops old chunks) | C | test/pipeline-smoke |
+| TASK-17 | done | C | test/pipeline-smoke; FR-03 retry-safety fixed in PR #18 |
 | TASK-18 | blocked-on-user | NONE | |
 | TASK-19 | blocked-on-user | NONE | |
-| TASK-21 | done | NONE | ci.yml; validate_sets step uses --allow-missing until TASK-18/19 |
+| TASK-21 | done | NONE | on main 2026-11-24 via PR #8; ci.yml; validate_sets step uses --allow-missing until TASK-18/19 |
 | TASK-20 | pending | NONE | exit gate |
 
 ## Parallelism Summary
