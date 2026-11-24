@@ -32,7 +32,7 @@ jobs:
       - name: Run tests with coverage and JUnit XML report
         run: |
           mkdir -p test-results
-          python -m pytest test tests --junitxml=test-results/pytest.xml --cov=src --cov-branch --cov-report=term-missing
+          python -m pytest test --junitxml=test-results/pytest.xml --cov=src --cov-branch --cov-report=term-missing
 
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2

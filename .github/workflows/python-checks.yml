@@ -20,6 +20,7 @@ jobs:
         with:
           python-version: '3.12'
 
+      # --diff-filter=d skips deleted files: ruff/mypy error (E902) on paths that no longer exist.
       # ruff/mypy come from requirements.txt so versions match what agents run locally.
       - name: Install dependencies
         run: |
@@ -35,7 +36,7 @@ jobs:
       # Blocking: only changed .py files must be clean (diff-scoped gate).
       - name: Ruff on changed files (blocking)
         run: |
-          CHANGED=$(git diff --name-only "${{ steps.diff.outputs.base }}" HEAD -- '*.py' | tr '\n' ' ')
+          CHANGED=$(git diff --name-only --diff-filter=d "${{ steps.diff.outputs.base }}" HEAD -- '*.py' | tr '\n' ' ')
           if [ -z "$CHANGED" ]; then
             echo "No changed Python files."
           else
@@ -49,7 +50,7 @@ jobs:
       # matches a `test`/`tests` segment anywhere so nested suites are excluded too.
       - name: Mypy on changed files (blocking)
         run: |
-          CHANGED=$(git diff --name-only "${{ steps.diff.outputs.base }}" HEAD -- '*.py' | grep -v -E '(^|/)(test|tests)/' | tr '\n' ' ')
+          CHANGED=$(git diff --name-only --diff-filter=d "${{ steps.diff.outputs.base }}" HEAD -- '*.py' | grep -v -E '(^|/)(test|tests)/' | tr '\n' ' ')
           if [ -z "$CHANGED" ]; then
             echo "No changed non-test Python files."
           else

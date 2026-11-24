@@ -1,10 +1,15 @@
 """Unit tests for src/resource/base_claude.py."""
 
+from unittest.mock import MagicMock, patch
+
 import pytest
-from unittest.mock import patch, MagicMock
 from pydantic import ValidationError
 
-from src.resource.base_claude import BaseAgent
+pytest.importorskip(
+    "anthropic", reason="anthropic SDK not installed (pip install -r requirements.txt)"
+)
+
+from src.resource.base_claude import BaseAgent  # noqa: E402
 
 
 class TestBaseAgentInstantiation:

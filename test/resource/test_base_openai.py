@@ -1,7 +1,8 @@
 """Unit tests for src/resource/base_openai.py."""
 
+from unittest.mock import MagicMock, patch
+
 import pytest
-from unittest.mock import patch, MagicMock
 from pydantic import ValidationError
 
 from src.resource.base_openai import BaseAgent

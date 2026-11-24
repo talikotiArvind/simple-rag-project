@@ -13,6 +13,7 @@ from unittest.mock import MagicMock, patch
 
 from src.resource.a2a.protocol import A2APeer
 
+from ._sdk import ANTHROPIC_MISSING, ANTHROPIC_SKIP_REASON
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -74,6 +75,7 @@ def _stub_agent_module() -> types.ModuleType:
 # ClaudeBaseAgent
 # ---------------------------------------------------------------------------
 
+@unittest.skipIf(ANTHROPIC_MISSING, ANTHROPIC_SKIP_REASON)
 class TestClaudeBaseAgent(unittest.TestCase):
     """Tests for ClaudeBaseAgent inheritance, peers, tool schema, and the tool-use loop."""
 
@@ -133,7 +135,7 @@ class TestClaudeBaseAgent(unittest.TestCase):
         self.assertEqual(agent._build_anthropic_tools(), [])
 
     def test_build_anthropic_tools_produces_schema(self):
-        """_build_anthropic_tools() emits a tool schema named after the peer with a message property."""
+        """_build_anthropic_tools() emits a peer-named tool schema with a message property."""
         peer = _make_peer("fact_checker")
         agent = self._make_agent(peers=[peer])
         tools = agent._build_anthropic_tools()
@@ -382,7 +384,7 @@ def _make_fake_genai():
 
 
 class TestGeminiBaseAgent(unittest.TestCase):
-    """Tests for GeminiBaseAgent inheritance, peers, function-call schema, and the function-call loop."""
+    """Tests for GeminiBaseAgent inheritance, peers, function-call schema and call loop."""
 
     def setUp(self):
         """Install fake `google.generativeai` SDK modules into sys.modules."""
@@ -464,7 +466,7 @@ class TestGeminiBaseAgent(unittest.TestCase):
         self.assertEqual(result, "gemini answer")
 
     def test_run_with_function_call_executes_peer(self):
-        """run() with peers executes a function_call for a peer, sends result back, returns final text."""
+        """run() with peers executes a peer function_call, sends the result back, returns text."""
         peer = _make_peer("lookup", output="lookup result")
         agent = self._make_agent(peers=[peer])
 
@@ -521,7 +523,7 @@ class TestGeminiBaseAgent(unittest.TestCase):
 # ---------------------------------------------------------------------------
 
 class TestToolAdapter(unittest.TestCase):
-    """Unit tests for src.resource.a2a.tool_adapter's tool-format conversion and dispatch helpers."""
+    """Unit tests for src.resource.a2a.tool_adapter's tool-format conversion and dispatch."""
 
     def test_to_anthropic_tools_structure(self):
         """to_anthropic_tools converts a peer list into Anthropic tool-schema dicts."""

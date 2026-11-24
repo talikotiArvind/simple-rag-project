@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import unittest
-from datetime import timezone
+from datetime import UTC
 from unittest.mock import MagicMock
 
 from src.resource.a2a.protocol import A2AMessage, A2APeer, A2AResponse
@@ -43,7 +43,7 @@ class TestA2AMessage(unittest.TestCase):
     def test_created_at_is_utc_aware(self) -> None:
         """created_at is timezone-aware and set to UTC."""
         msg = A2AMessage(sender="a", payload="x")
-        self.assertEqual(msg.created_at.tzinfo, timezone.utc)
+        self.assertEqual(msg.created_at.tzinfo, UTC)
 
 
 class TestA2AResponse(unittest.TestCase):
