@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
-from rag_core.exceptions import AuthorizationError, NotFoundError
+from rag_core.exceptions import AuthorizationError, NotFoundError, ValidationError
 from rag_core.models import Hit, RankedLists
 
 if TYPE_CHECKING:
@@ -38,6 +38,8 @@ class TenantScopedStore:
     ) -> RankedLists:
         """Query with the tenant filter inside the query; drop foreign hits defensively."""
         self._require_tenant(auth)
+        if k <= 0:
+            raise ValidationError("k must be positive")
         if TENANT_FILTER_KEY in filters:
             raise AuthorizationError("tenant_id filter is forbidden; tenant comes from AuthContext")
         scoped = {**filters, TENANT_FILTER_KEY: auth.tenant_id}

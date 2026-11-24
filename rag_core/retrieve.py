@@ -74,7 +74,10 @@ class RetrievalService:
         """Embed, search within the caller's tenant, fuse, rerank and return ordered results."""
         timings = StageTimings()
         start = time.perf_counter()
-        vector = self._embedder.embed([request.query])[0]
+        vectors = self._embedder.embed([request.query])
+        if not vectors:
+            raise ValidationError("embedder returned no vector for the query")
+        vector = vectors[0]
         timings.embed_ms = _elapsed_ms(start)
 
         start = time.perf_counter()

@@ -39,7 +39,11 @@ class IngestPipeline:
         raw = self._sources.read_source(source_uri)
         version = hashlib.sha256(raw).hexdigest()
         validate_envelope_id(info.doc_id)  # R-17: rejected at ingest
-        pieces = self._chunker(raw.decode("utf-8"))
+        try:
+            text = raw.decode("utf-8")
+        except UnicodeDecodeError:
+            raise ValidationError(f"source {source_uri!r} is not valid UTF-8") from None
+        pieces = self._chunker(text)
         report = IngestReport(doc_id=info.doc_id, index_version=self._index_version)
         indexed = self._index.document_version(info.tenant_id, info.doc_id, self._index_version)
         if indexed == version:
